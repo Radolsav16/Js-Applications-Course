@@ -1,5 +1,10 @@
 const url = "http://localhost:3030/jsonstore/cookbook/recipes";
 
+const divLinks = document.querySelector('#guest');
+divLinks.style.display = 'block';
+
+const registerButton = document.querySelector('')
+
 const main = document.querySelector("main");
 const p = document.querySelector("p");
 main.removeChild(p);
@@ -47,7 +52,7 @@ fetch(url)
     
 
     article.addEventListener('click',(e)=>{
-        
+        main.innerHTML = '';
         const id = e.target.id;
 
         
