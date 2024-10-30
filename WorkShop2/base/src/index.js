@@ -1,9 +1,41 @@
-const url = "http://localhost:3030/jsonstore/cookbook/recipes";
+const url = "http://localhost:3030/data/recipes";
 
-const divLinks = document.querySelector('#guest');
-divLinks.style.display = 'block';
 
-const registerButton = document.querySelector('')
+
+const registerButton = document.querySelector('#register');
+const LoginButton = document.querySelector('#login');
+
+
+function navigationInit(){
+
+  const email = localStorage.getItem('email');
+
+  if(email && email !== 'undefined'){
+    const divUser = document.querySelector('#user');
+    divUser.style.display = 'block';
+
+    const logoutButton = document.querySelector('#logoutBtn');
+    logoutButton.addEventListener('click',logOut);
+  }else{
+    const divGuest = document.querySelector('#guest');
+    divGuest.style.display = 'block';
+  }
+
+
+}
+
+navigationInit();
+
+
+function logOut(e){
+    localStorage.removeItem('email');
+    localStorage.removeItem('token');
+
+    location.href = 'file:///C:/Users/Lenovo/OneDrive/Desktop/druga%20javascript%20papka/Javascript/SoftUni/Js-Applications-Course/WorkShop2/base/index.html';
+}
+
+
+
 
 const main = document.querySelector("main");
 const p = document.querySelector("p");
@@ -13,34 +45,32 @@ let id = 1;
 fetch(url)
   .then((res) => res.json())
   .then((data) => {
-    Object.keys(data).forEach((key) => {
-      let obj = data[key];
-
+    data.forEach((obj) => {
     const article = document.createElement('article');
     article.className = 'preview';
-    article.id = key;
+    article.id = obj._id;
     
 
     const divTitle = document.createElement('div');
     divTitle.className = 'title';
-    divTitle.id = key;
+    divTitle.id = obj._id;
    
 
     const h2 = document.createElement('h2');
     h2.textContent = `${obj.name}`;
-    h2.id = key;
+    h2.id = obj._id;
    
 
     divTitle.appendChild(h2);
 
     const divSmall = document.createElement('div');
     divSmall.className = 'small';
-    divSmall.id = key;
+    divSmall.id = obj._id;
    
 
     const img = document.createElement('img');
     img.src = `${obj.img}`;
-    img.id = key;
+    img.id = obj._id;
  
 
     divSmall.appendChild(img);
@@ -55,15 +85,14 @@ fetch(url)
         main.innerHTML = '';
         const id = e.target.id;
 
-        
-        
-        
-        const url = `http://localhost:3030/jsonstore/cookbook/details/${id}`;
+        const newUrl = `${url}/${id}`;
 
-        fetch(url)
+        fetch(newUrl)
             .then((res)=>res.json())
             .then((data)=>{
+              
                 const article = document.createElement('article');
+               
                 const h2 = document.createElement('h2');
                 h2.textContent = data.name;
 
@@ -107,18 +136,13 @@ fetch(url)
                 const h3Preparation = document.createElement('h3');
                 h3Preparation.textContent = 'Preperation:';
 
-                const p1 = document.createElement('p');
-                p1.textContent = 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius, quaerat.';
-
-                const p2 = document.createElement('p');
-                p2.textContent = 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius, quaerat.';
-
-                const p3 = document.createElement('p');
-                p3.textContent = 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius, quaerat.';
-
                 divDescription.appendChild(h3Preparation)
-                divDescription.append(p1,p2,p3);
 
+                data.steps.forEach((step)=>{
+                  const p = document.createElement('p');
+                  p.textContent = step;
+                  divDescription.appendChild(p);
+                })
                 article.appendChild(divDescription);
 
                 main.appendChild(article)
@@ -128,6 +152,8 @@ fetch(url)
 
             })
             .catch((err)=>console.log(err))
+
+        
 
 
 
