@@ -1,6 +1,4 @@
-// const emailInput = document.querySelector('input[name="email"]');
-// const passwordInput = document.querySelector('input[type="password"]');
-// const rePasswordInput = document.querySelector('input[name="rePass"]');
+
 
 
 
@@ -41,7 +39,8 @@ function registerUser(e){
         localStorage.setItem('token',data.accessToken);
         localStorage.setItem('email',data.email);
 
-        location.href = 'file:///C:/Users/Lenovo/OneDrive/Desktop/druga%20javascript%20papka/Javascript/SoftUni/Js-Applications-Course/WorkShop2/base/index.html';
+        location.href = 'file:///C:/Users/Lenovo/OneDrive/Desktop/druga%20javascript%20papka/Javascript/SoftUni/Js-Applications-Course/Remote Data and Authitication/base/index.html';
+        
 
         
     })

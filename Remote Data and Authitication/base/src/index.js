@@ -1,19 +1,10 @@
-const url = "http://localhost:3030/data/recipes";
-
-
-
-const registerButton = document.querySelector('#register');
-const LoginButton = document.querySelector('#login');
-
 
 function navigationInit(){
-
   const email = localStorage.getItem('email');
 
   if(email && email !== 'undefined'){
     const divUser = document.querySelector('#user');
     divUser.style.display = 'block';
-
     const logoutButton = document.querySelector('#logoutBtn');
     logoutButton.addEventListener('click',logOut);
   }else{
@@ -23,6 +14,7 @@ function navigationInit(){
 
 
 }
+
 
 navigationInit();
 
@@ -37,16 +29,20 @@ function logOut(e){
 
 
 
-const main = document.querySelector("main");
-const p = document.querySelector("p");
-main.removeChild(p);
-let id = 1;
+const url = "http://localhost:3030/data/recipes";
+
 
 fetch(url)
   .then((res) => res.json())
   .then((data) => {
+
+    const main = document.querySelector("main");
+    const p = document.querySelector("p");
+    main.removeChild(p);
+
     data.forEach((obj) => {
-    const article = document.createElement('article');
+    
+      const article = document.createElement('article');
     article.className = 'preview';
     article.id = obj._id;
     
@@ -167,5 +163,9 @@ fetch(url)
   
 
  
+
+  function displayRecipe(data){
+    
+  }
   
   
