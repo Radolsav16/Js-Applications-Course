@@ -1,11 +1,6 @@
-
-
-
-
-const [emailInput,passwordInput,rePassword,submitInput] = document.querySelectorAll('input');
-
-
-const form = document.querySelector('form');
+import { clear } from "./sectionDisplay.js";
+const sectionElement = document.querySelector('#register-section');
+const form = sectionElement.querySelector('form');
 
 form.addEventListener('submit',registerUser)
 
@@ -35,14 +30,16 @@ function registerUser(e){
 
     .then(res => res.json())
     .then(data => {
-       
+        localStorage.setItem('id',data._id);
         localStorage.setItem('token',data.accessToken);
         localStorage.setItem('email',data.email);
 
-        location.href = 'file:///C:/Users/Lenovo/OneDrive/Desktop/druga%20javascript%20papka/Javascript/SoftUni/Js-Applications-Course/Remote Data and Authitication/base/index.html';
-        
-
-        
+        location.href = '/';
     })
     .catch(err => console.log(err));
+}
+
+ export function registerDisplay(){
+    clear()
+    sectionElement.style.display = 'block';   
 }

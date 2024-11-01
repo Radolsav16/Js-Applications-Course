@@ -1,6 +1,16 @@
-const form = document.querySelector('form');
+import { clear } from "./sectionDisplay.js";
+
+
+const sectionElement = document.querySelector('#login-section');
+const form = sectionElement.querySelector('form');
+
 
 const url = 'http://localhost:3030/users/login';
+const main = document.querySelector('main')
+
+
+
+
 
 form.addEventListener('submit',loginUser);
 
@@ -24,13 +34,22 @@ function loginUser(e){
         if(data.code >= 400){
            return  alert(data.message);
         }
-       
+
+
+        localStorage.setItem('id',data._id);
         localStorage.setItem('token',data.accessToken);
         localStorage.setItem('email',data.email);
 
-        location.href = 'file:///C:/Users/Lenovo/OneDrive/Desktop/druga%20javascript%20papka/Javascript/SoftUni/Js-Applications-Course/Remote Data and Authitication/base/index.html';
+        location.href = '/';
+
 
         
     })
     .catch(err => console.log(err));
+}
+
+
+export function displayLogin(){
+    clear()
+    sectionElement.style.display = 'block';
 }

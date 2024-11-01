@@ -1,4 +1,8 @@
-const form = document.querySelector('form');
+import { clear } from "./sectionDisplay.js";
+
+const sectionElement = document.querySelector('#create-section');
+
+const form = sectionElement.querySelector('form');
 
 form.addEventListener('submit',createRecipe);
 
@@ -25,15 +29,15 @@ function createRecipe(e){
 
     .then(res => res.json())
     .then(data => {
-        location.href = 'file:///C:/Users/Lenovo/OneDrive/Desktop/druga%20javascript%20papka/Javascript/SoftUni/Js-Applications-Course/Remote Data and Authitication/base/index.html';
+        location.href = '/';
+
      
     })
     .catch(err => console.log(err));
-    
   
+}
 
-    
-
-    
-    
+export function makeRecipe(){
+    clear()
+    sectionElement.style.display = 'block';
 }
