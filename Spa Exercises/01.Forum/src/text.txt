@@ -1,0 +1,57 @@
+  const Divcontainer = document.createElement("div");
+  Divcontainer.className = "topic-container";
+
+  const DivthemeContent = document.createElement("div");
+  DivthemeContent.className = "theme-content";
+
+  const DivThemeTitle = document.createElement("div");
+  DivThemeTitle.className = "theme-title";
+
+  const divTitleWrapper = document.createElement("div");
+  divTitleWrapper.className = "theme-name-wrapper";
+
+  const DivThemeName = document.createElement("div");
+  DivThemeName.className = "theme-name";
+
+  const h2 = document.createElement("h2");
+  h2.textContent = obj.title;
+
+  DivThemeName.appendChild(h2);
+  divTitleWrapper.appendChild(DivThemeName);
+  DivThemeTitle.appendChild(divTitleWrapper);
+  DivthemeContent.appendChild(DivThemeTitle);
+
+//   const divComment = document.createElement("div");
+//   divComment.className = "comment";
+
+//   const divHeader = document.createElement("div");
+//   divHeader.className = "header";
+
+//   const img = document.createElement("img");
+//   img.src = "./static/profile.png";
+//   img.alt = "avatar";
+
+//   const p = document.createElement("p");
+
+//   const span = document.createElement("span");
+//   span.textContent = obj.username;
+
+//   const text = document.createTextNode(" posted on ");
+
+//   const time = document.createElement("time");
+//   time.textContent = obj.date;
+
+//   p.appendChild(span);
+//   p.appendChild(text);
+//   p.appendChild(time);
+
+//   const pPost = document.createElement("p");
+//   pPost.textContent = obj.content;
+//   pPost.className = "post-content";
+
+//   divHeader.appendChild(img);
+//   divHeader.appendChild(p);
+//   divHeader.appendChild(pPost);
+
+//   divComment.appendChild(divHeader);
+//   DivthemeContent.appendChild(divComment);
