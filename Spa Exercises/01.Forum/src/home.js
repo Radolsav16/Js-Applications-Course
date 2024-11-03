@@ -4,6 +4,8 @@ const buttonCancel = document.querySelector(".cancel");
 const main = document.querySelector("main");
 const container = document.querySelector('.container');
 
+let postId;
+
 
 buttonCancel.addEventListener("click", clear);
 form.addEventListener("submit", createPost);
@@ -73,7 +75,6 @@ function createPostVisible(obj) {
 
     const h2 = document.createElement('h2');
     h2.textContent = obj.title;
-    h2.id = obj._id;
 
     const divColumns = document.createElement('div');
     divColumns.className = 'columns';
@@ -114,9 +115,12 @@ function createPostVisible(obj) {
 
     topicNameWrapper.appendChild(topicName);
     topicContainer.appendChild(topicNameWrapper);
-    topicContainer.id = obj._id
 
+    topicContainer.id = obj._id;
+    
     topicContainer.addEventListener('click',loadsComments);
+
+    postId = obj._id;
 
     
     main.appendChild(topicContainer)
@@ -196,7 +200,16 @@ async function displayCurrentComments(){
 
     const dataArr = Object.values(data);
 
-    dataArr.forEach((obj)=>{
+
+
+    const divComment = document.querySelector('.comment');
+    const divsUser = divComment.querySelectorAll('.user-comment');
+    divsUser.forEach((div)=>{
+        divComment.removeChild(div);
+    })
+
+
+    dataArr.forEach((obj)=>{ 
         userCommentView(obj);
     })
     
@@ -243,6 +256,10 @@ function createCommentViewing(obj){
     const buttonPost = document.createElement('button');
     buttonPost.textContent = 'Post';
 
+    const buttonHide = document.createElement('button');
+    buttonHide.textContent = 'Hide';
+    buttonHide.addEventListener('click',hideDiv);
+
     
     
     label.appendChild(spanS)
@@ -259,6 +276,7 @@ function createCommentViewing(obj){
     form.appendChild(div);
 
     form.appendChild(buttonPost);
+    form.appendChild(buttonHide)
 
     divAnswer.appendChild(form);
 
@@ -292,23 +310,20 @@ async function createComment(e) {
 
     const date = new Date().toISOString();
 
-    const postId = form.id;
-
-    console.log(postId);
     
 
-    // const res = await fetch(url,{
-    //     method:"POST",
-    //     headers:{
-    //         'Content-Type':'application/json'
-    //     },
-    //     body:JSON.stringify({text:dataForm.postText,username:dataForm.username,date,postId})
-    // });
-    // const data = await res.json();
+    const res = await fetch(url,{
+        method:"POST",
+        headers:{
+            'Content-Type':'application/json'
+        },
+        body:JSON.stringify({text:dataForm.postText,username:dataForm.username,date,postId})
+    });
+    const data = await res.json();
 
-    // form.reset();
+    form.reset();
 
-    // displayCurrentComments()
+    displayCurrentComments()
    
     
     
@@ -318,8 +333,11 @@ async function createComment(e) {
 
 function userCommentView(obj){
 
-    // const commentDiv = document.getElementById(`${obj.postId}`);
+    const commentDiv = document.querySelector('.comment');
+
+
     
+
     const divUserComment = document.createElement("div");
     divUserComment.className = "user-comment";
 
@@ -357,8 +375,18 @@ function userCommentView(obj){
     divUserComment.appendChild(divWrapper);
 
 
-    // commentDiv.appendChild(divUserComment);
+    commentDiv.appendChild(divUserComment);
   
 }
 
 
+
+
+function hideDiv(e){
+    const commentDiv = document.querySelector('div.comment[style*="display: block"]');
+    const answerDiv = document.querySelector('div.answer-comment[style*="display: block"]');
+
+    commentDiv.style.display = 'none';
+    answerDiv.style.display = 'none';
+   
+}
