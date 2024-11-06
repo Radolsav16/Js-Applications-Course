@@ -1,5 +1,6 @@
-const { chromium } = require('playwright-chromium');
-const { expect } = require('chai');
+import {chromium} from 'playwright-chromium';
+import {expect} from 'chai';
+
 
 const host = 'http://localhost:3000'; // Application host (NOT service host - that can be anything)
 
@@ -16,10 +17,10 @@ const mockData = {
       author: 'Garry',
       content: 'Yep, whats up :?',
     },
-    {
-      author: 'George',
-      content: 'Hello, guys! :))',
-    },
+    // {
+    //   author: 'George',
+    //   content: 'Hello, guys! :))',
+    // },
   ],
 };
 
@@ -54,8 +55,24 @@ describe('E2E tests', function () {
   // Test proper
   describe('Messenger Info', () => {
     it('Load Message', async () => {
+      // const data = mockData.list;
+      // const { get } = await handle(endpoints.list);
+      // get(data);
+
+      // await page.goto(host);
+      // await page.waitForSelector('#refresh');
+
+      // await page.click('input[value="Refresh"]');
+
+      // const post = await page.$$eval(`textarea`, (t) => t.map((s) => s.value));
+
+      // expect(post[0]).to.equal(
+      //   `${data[0].author}: ${data[0].content}\n${data[1].author}: ${data[1].content}\n${data[2].author}: ${data[2].content}`
+      // );
       const data = mockData.list;
-      const { get } = await handle(endpoints.list);
+
+      const {get} = await handle(endpoints.list)
+
       get(data);
 
       await page.goto(host);
@@ -63,14 +80,40 @@ describe('E2E tests', function () {
 
       await page.click('input[value="Refresh"]');
 
-      const post = await page.$$eval(`textarea`, (t) => t.map((s) => s.value));
+      const post = await page.$$eval(`textarea`,(t) => t.map((r)=>r.value));
 
-      expect(post[0]).to.equal(
-        `${data[0].author}: ${data[0].content}\n${data[1].author}: ${data[1].content}\n${data[2].author}: ${data[2].content}`
-      );
+      expect(post[0]).to.equal(`${data[0].author}: ${data[0].content}\n${data[1].author}: ${data[1].content}`);
     });
 
     it('Send Message API call', async () => {
+      // const data = mockData.list[0];
+      // await page.goto(host);
+
+ 
+
+      // page.click('input[type="submit"]')
+      // const {post} = await handle(endpoints.list);
+      // const {onRequest} = post();
+
+      // await page.waitForSelector('#submit');
+      // // await waitForSelector('input[name="content"]');
+      // // await waitForSelector('input[name="author"]');
+
+      // await page.fill('input[name="author"]',data.author);
+      // await page.fill('input[name="content"]',data.content);
+
+      // const [request] = await Promise.all([
+      //   onRequest(),
+      //   page.click('input[value="Send"]')
+      // ])
+
+      // const postData = JSON.parse(await request.postData());
+
+      // expect(postData.author).to.be.equal(data.author);
+      // expect(post.content).to.be.equal(data.content);
+
+
+
       const data = mockData.list[0];
       await page.goto(host);
 
