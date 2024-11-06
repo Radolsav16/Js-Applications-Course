@@ -1,5 +1,6 @@
 function attachEvents() {
   const textArea = document.querySelector("textarea");
+
   const [nameInput, messageInput, sendButton, refreshButton] =
     document.querySelectorAll("input");
 
@@ -12,7 +13,7 @@ function attachEvents() {
     const author = nameInput.value;
     const content = messageInput.value;
 
-    try {
+   
       const res = await fetch(url, {
         method: "POST",
         headers: {
@@ -21,25 +22,29 @@ function attachEvents() {
         body: JSON.stringify({ author, content }),
       });
       const data = await res.json();
+      console.log(data);
+      
     
 
       nameInput.value = "";
       messageInput.value = "";
-    } catch (err) {
-        console.log(err);
-    }
+    
   }
 
   async function showMessage() {
     const res = await fetch(url);
     const data = Object.values(await res.json());
 
-    textArea.value = " ";
+    
 
     data.forEach((obj) => {
-      textArea.value += `${obj.author}: ${obj.content} \n`;
+      textArea.value += `${obj.author}: ${obj.content}\n`;
     });
+   
+    
   }
 }
 
 attachEvents();
+
+

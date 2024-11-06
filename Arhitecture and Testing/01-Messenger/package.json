@@ -1,0 +1,22 @@
+{
+  "name": "01-messenger",
+  "version": "1.0.0",
+  "main": "app.js",
+  "type": "module",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "dev":"lite-server",
+    "test": "mocha"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "chai": "^5.1.2",
+    "lite-server": "^2.6.1",
+    "mocha": "^10.8.2",
+    "playwright-chromium": "^1.48.2"
+  }
+}
