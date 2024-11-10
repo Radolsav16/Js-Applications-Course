@@ -5,6 +5,21 @@ class Cat {
         this.statusMessage = statusMessage;
         this.imageLocation = imageLocation;
     }
+
+    showStatusCode(e){
+       const button = e.target;
+       const divInfo = button.parentElement;
+       const divStatus = divInfo.querySelector(".status");
+
+       if(button.textContent === 'Show status code'){
+            divStatus.style.display = 'block';
+            button.textContent = 'Hide status code';
+       }else{
+        divStatus.style.display = 'none';
+        button.textContent = 'Show status code';
+       }
+       
+    }
 }
 
 const cats = [
