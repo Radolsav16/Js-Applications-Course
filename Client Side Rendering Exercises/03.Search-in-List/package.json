@@ -1,23 +1,21 @@
 {
-  "name": "01.list-towns",
+  "name": "03.search-in-list",
   "version": "1.0.0",
-  "main": "app.js",
+  "main": "search.js",
+  "type": "module",
   "directories": {
     "test": "tests"
   },
   "scripts": {
     "dev":"lite-server",
-    "tests": "mocha"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
-  "devDependencies": {
-    "lite-server": "^2.6.1"
-  },
   "dependencies": {
-    "chai": "^5.1.2",
     "lit-html": "^3.2.1",
-    "mocha": "^10.8.2"
+    "lite-server": "^2.6.1"
   }
 }
