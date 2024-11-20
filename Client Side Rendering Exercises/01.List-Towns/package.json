@@ -1,0 +1,23 @@
+{
+  "name": "01.list-towns",
+  "version": "1.0.0",
+  "main": "app.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "dev":"lite-server",
+    "tests": "mocha"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "lite-server": "^2.6.1"
+  },
+  "dependencies": {
+    "chai": "^5.1.2",
+    "lit-html": "^3.2.1",
+    "mocha": "^10.8.2"
+  }
+}
