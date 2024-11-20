@@ -1,0 +1,21 @@
+{
+  "name": "04.fill-dropdown",
+  "version": "1.0.0",
+  "main": "dropdown.js",
+  "type": "module",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "dev":"lite-server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "lit-html": "^3.2.1",
+    "lite-server": "^2.6.1"
+  }
+}
