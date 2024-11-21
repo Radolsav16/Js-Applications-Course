@@ -1,25 +1,21 @@
 {
-  "name": "cyberpunk",
+  "name": "exam-1",
   "version": "1.0.0",
-  "description": "Cyberpunk Market Single Page Application",
-  "main": "index.html",
-  "type": "module",
-  "scripts": {
-    "test": "mocha tests",
-    "start": "http-server -a localhost -p 3000 -P http://localhost:3000? -c-1",
-    "dev":"lite-server"
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
   },
+  "scripts": {
+    "dev":"lite-server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "chai": "4.3.4",
-    "http-server": "14.1.1",
-    "lite-server": "^2.6.1",
-    "mocha": "8.3.2",
-    "playwright-chromium": "1.9.2"
-  },
+  "description": "",
   "dependencies": {
     "lit-html": "^3.2.1",
+    "lite-server": "^2.6.1",
     "page": "^1.11.6"
   }
 }
