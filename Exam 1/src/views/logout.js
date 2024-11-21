@@ -1,4 +1,8 @@
+import page from "../../node_modules/page/page.mjs";
+import { userHelper } from "../service/userService.js";
+
+
 export function showLogoutView(){
-    console.log('logout');
-    
+    userHelper.clearUserData();
+    page.redirect('/')
 }

@@ -1,3 +1,5 @@
+
+
 function setUserData(data){
     localStorage.setItem('userData',data)
 }
@@ -8,9 +10,12 @@ function getUserData(){
 
 function getAccessToken(){
     const data = getUserData();
+    if(data){
     const accessToken = data.accessToken;
-
     return accessToken;
+    }else{
+        return null
+    }
 }
 
 function getUserId(){
@@ -20,10 +25,18 @@ function getUserId(){
     return id;
 }
 
+function clearUserData(){
+    localStorage.clear();
+}
+
 
 export const userHelper = {
     setUserData,
     getUserData,
     getAccessToken,
-    getUserId
+    getUserId,
+    clearUserData
 } 
+
+
+
