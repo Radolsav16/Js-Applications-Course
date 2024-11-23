@@ -4,6 +4,7 @@ import { casualRender } from "../middewares/middleware.js";
 import { UserPoints } from "../service/endpoints.js";
 import { requesterApi } from "../service/requester.js";
 import { userHelper } from "../service/userService.js";
+import { showErrorMessage } from "../middewares/errorMessage.js";
 
 
 
@@ -51,19 +52,25 @@ async function onRegister(e){
     const rePass = formData['re-password'];
 
     if(!email  || !password || !rePass) {
-        alert("Passwords don't match.");
+        showErrorMessage('Please fill all fields!');
         return;
     }
 
     if(rePass !== password) {
-        alert("Passwords don't match.");
+        showErrorMessage("Password and Re-Password don't match!");
         return;
     }
    
 
-    const data = await requesterApi.post('POST',UserPoints.register,{email,password})    
     
-    userHelper.setUserData(data);
+    
+
+    const data = await requesterApi.post(UserPoints.register,{email,password})  
+    
+    
+    
+    userHelper.setUserData(data._id,data.email,data.accessToken);
+    
     
     page.redirect('/')
     

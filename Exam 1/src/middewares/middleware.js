@@ -2,7 +2,7 @@ import { html, render } from "../../node_modules/lit-html/lit-html.js";
 import { userHelper } from "../service/userService.js";
 
 
-const main = document.querySelector('#main-element');
+export const main = document.querySelector('#main-element');
 
 
 const userDiv = document.querySelector('.user');
@@ -17,8 +17,11 @@ export function casualRender(tempFunction){
 
 
 function initNavigation(){
-    const isLooged = userHelper.getUserData();
+    const isLooged = userHelper.getUserId();
 
+    
+
+    
     
    
 

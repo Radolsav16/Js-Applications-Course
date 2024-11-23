@@ -1,32 +1,36 @@
 
-
-function setUserData(data){
-    localStorage.setItem('userData',data)
+function setUserData(id,email,accessToken){
+    localStorage.setItem('userID',id);
+    localStorage.setItem('email',email);
+    localStorage.setItem('accessToken',accessToken)
 }
 
 function getUserData(){
-    return localStorage.getItem('userData');
+    return {
+        id:localStorage.getItem('userID'),
+        email:localStorage.getItem('email'),
+    };
 }
 
 function getAccessToken(){
-    const data = getUserData();
-    if(data){
-    const accessToken = data.accessToken;
-    return accessToken;
-    }else{
-        return null
-    }
+    return localStorage.getItem('accessToken');
 }
 
 function getUserId(){
-    const data = getUserData();
-    const id = data.is;
-
-    return id;
+    return localStorage.getItem('userID');
 }
 
 function clearUserData(){
     localStorage.clear();
+}
+
+
+function isUserIsLogged(){
+    return Boolean(getUserData());
+}
+
+function isLoogedUserIsOwner(id,ownerId){
+    return id === ownerId;
 }
 
 
@@ -35,7 +39,9 @@ export const userHelper = {
     getUserData,
     getAccessToken,
     getUserId,
-    clearUserData
+    clearUserData,
+    isUserIsLogged,
+    isLoogedUserIsOwner
 } 
 
 

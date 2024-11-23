@@ -30,7 +30,8 @@ const marketTemplate = (items) => html`
 
 export async function showMarketView(){
     const data = await requesterApi.get(ItemsPoints.getAll);
+   
     
-    render(marketTemplate(data),main)
+    render(marketTemplate(Array.from(data)),main)
 
 }
