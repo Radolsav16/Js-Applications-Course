@@ -11,17 +11,33 @@ async function get(url) {
 }
 
 
-async function post(method,url,data) {
-    const res = await fetch(url,{
-        method,
-        headers:{
-            'Content-Type':'application/json'
-        },
-        body:JSON.stringify(data)
-    });
+async function post(url,data) {
+
+    const options = {
+        method:"POST",
+        headers:{},
+    }
+
+    if(data){
+        options.headers['Content-Type'] = 'application/json';
+        options.body = JSON.stringify(data);
+    }
+
+
+    const accessToken = userHelper.getAccessToken();
+    
+    
+    if(accessToken){
+        options.headers['X-Authorization'] = accessToken;
+    }
+
+  
+    const res = await fetch(url,options);
+    
+    
 
     if(!res.ok){
-        alert('Has this user in system!');
+        alert('Not make it post request');
         return;
     }
 
@@ -31,12 +47,72 @@ async function post(method,url,data) {
 
 }
 
-async function put(method,url,data) {
+async function put(url,data) {
+ 
+    const options = {
+        method:"PUT",
+        headers:{},
+    }
+
+    if(data){
+        options.headers['Content-Type'] = 'application/json';
+        options.body = JSON.stringify(data);
+    }
+
+
+    const accessToken = userHelper.getAccessToken();
     
+    
+    if(accessToken){
+        options.headers['X-Authorization'] = accessToken;
+    }
+
+  
+    const res = await fetch(url,options);
+    
+    
+
+    if(!res.ok){
+        alert('Not make it put request');
+        return;
+    }
+
+    const result = await res.json();
+
+    return result;
 }
 
-async function del(method,url) {
-   
+async function del(url) {
+    const options = {
+        method:"DELETE",
+        headers:{},
+    }
+
+    
+    options.headers['Content-Type'] = 'application/json';
+     
+
+
+    const accessToken = userHelper.getAccessToken();
+    
+    
+    if(accessToken){
+        options.headers['X-Authorization'] = accessToken;
+    }
+
+  
+    const res = await fetch(url,options);
+    
+    
+
+    if(!res.ok){
+        alert('Not delete request');
+        return;
+    }
+
+    const result = await res.json();
+
+    return result;
 }
 
 

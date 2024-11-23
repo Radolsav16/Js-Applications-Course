@@ -1,5 +1,6 @@
 const User_URL = 'http://localhost:3030/users';
-const Items_URL = 'http://localhost:3030/data'
+const Items_URL = 'http://localhost:3030/data';
+
 
 
 export const UserPoints = {

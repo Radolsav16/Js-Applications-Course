@@ -4,6 +4,7 @@ import { requesterApi } from "../service/requester.js";
 import page from "../../node_modules/page/page.mjs";
 import { UserPoints } from "../service/endpoints.js";
 import { userHelper } from "../service/userService.js";
+import { showErrorMessage } from "../middewares/errorMessage.js";
 
 const loginTemplate = () => html `  
 <section id="login">
@@ -35,10 +36,17 @@ async function onLogin(e){
     e.preventDefault();
     const { email , password } = Object.fromEntries(new FormData(e.target).entries());
     
-    if(!email || !password ) return;
+    if(!email || !password ) {
+      showErrorMessage('Please fill all fields!');
+      return;
+    };
 
-    const data = await requesterApi.post('POST',UserPoints.login,{email,password});
-    userHelper.setUserData(data);
+    const data = await requesterApi.post(UserPoints.login,{email,password});
+
+    
+
+    userHelper.setUserData(data._id,data.email,data.accessToken);
+  
     
     page.redirect('/');
 
