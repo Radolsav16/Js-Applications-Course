@@ -1,11 +1,13 @@
 import { html, render } from "../../node_modules/lit-html/lit-html.js";
 import { elemnts } from "../elements.js";
 import { ItemsPoints  } from "../service/endpoints.js";
-import { setItemId } from "../service/itemService.js";
+import { getItemId, setItemId } from "../service/itemService.js";
+import { getItemLikes , isUserLiked , makeLike } from "../service/likeFunctionality.js";
 import { api } from "../service/requester.js";
-import { isLooged, isOwner } from "../service/userService.js";
+import { getUserData, isLooged, isOwner } from "../service/userService.js";
 
-const detailsTemplate = (data, isLooged, isOwner) => html`
+
+const  detailsTemplate = (data, isLooged, isOwner , likes , isLiked) => html`
     <section id="details">
           <div id="details-wrapper">
             <img
@@ -22,7 +24,7 @@ const detailsTemplate = (data, isLooged, isOwner) => html`
                    ${data.description}
                   </p>
                 </div>
-                <h3>Like tattoo:<span id="like">0</span></h3>
+                <h3>Like tattoo:<span id="like">${likes}</span></h3>
 
                 ${
                   isLooged && isOwner
@@ -36,8 +38,8 @@ const detailsTemplate = (data, isLooged, isOwner) => html`
                 }
 
                   ${
-                    !isLooged || !isOwner
-                      ? html` <a href="#" id="like-btn">Like</a> `
+                    isLooged && !isOwner && !isLiked
+                      ? html` <a href="" id="like-btn" @click=${like}>Like</a> `
                       : ""
                   }
                 </div>
@@ -56,7 +58,24 @@ export async function detailsPageView(ctx) {
   const loged = isLooged();
   const owner = isOwner(data._ownerId);
 
- 
+
+ const itemLikes = await getItemLikes(id);
+
+  const isLiked  = await isUserLiked(id,getUserData().userId);
+
   
-  render(detailsTemplate(data, loged, owner),elemnts.main);
+  
+  
+  render(detailsTemplate(data, loged, owner , itemLikes , isLiked),elemnts.main);
+}
+
+
+
+
+async function like(){
+    const likeBtn = document.getElementById('like-btn');
+    likeBtn.style.display = 'none';
+    const id = getItemId();
+    const result = await makeLike(id);
+
 }
