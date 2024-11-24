@@ -45,12 +45,16 @@ async function onLogin(e){
         return;
     }
 
-    
+    try{
     const data = await api.post(UserPoints.login,{email,password});
 
     setUserData(data._id,data.email,data.accessToken);
 
     page.redirect('/');
+
+    }catch(err){
+      window.alert('Error!')
+    }
     
     
 }
