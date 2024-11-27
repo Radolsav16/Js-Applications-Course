@@ -6,7 +6,6 @@ import { api } from '../service/requester.js';
 import { getItemId } from '../service/userService.js';
 
 
-const itemId = getItemId();
 
 
 const editTemplate = (data) => html `
@@ -59,45 +58,12 @@ const editTemplate = (data) => html `
 
 
 export async function editPageView(){
-    const data = await api.get(itemEndpoins.id(itemId));
+    const data = await api.get(itemEndpoins.id(getItemId()));
     render(editTemplate(data),main);
 } 
 
 
 async function onEdit(e) {
-    // e.preventDefault();
-    // const formData = Object.fromEntries(new FormData(e.target).entries());
-
-    // const model = formData["model"];
-    // const imageUrl = formData["imageUrl"];
-    // const price = formData["price"];
-    // const weight = formData["weight"];
-    // const speed = formData["speed"];
-    // const about = formData["about"];
-
-    // if(!model || !imageUrl || !price || !weight || !speed || !about){
-    //     window.alert('Please fill all fields!');
-    //     return;
-    // }
-
-
-
-    // try{
-    // const data = await api.put(itemEndpoins.id(itemId),{
-    //     model,
-    //     imageUrl, 
-    //     price, 
-    //     weight,
-    //     speed,
-    //     about
-    //   });
-
-    // page.redirect(`/details/${itemId}`);
-
-    // }catch(err){
-    //     window.alert(err.message);
-    // }
-
     e.preventDefault();
     const formData = Object.fromEntries(new FormData(e.target).entries());
  
@@ -115,9 +81,8 @@ async function onEdit(e) {
         return;
     }
 
-    try{
-    const id = getItemId()    
-    const data = await api.put(itemEndpoins.id(id),{
+    try{  
+    const data = await api.put(itemEndpoins.id(getItemId()),{
         model,
         imageUrl, 
         price, 
@@ -126,7 +91,7 @@ async function onEdit(e) {
         about
       });
 
-        page.redirect(`/details/${id}`);
+        page.redirect(`/details/${getItemId()}`);
 
     }catch(err){
         window.alert(err.message);

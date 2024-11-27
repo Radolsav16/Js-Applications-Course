@@ -9,6 +9,7 @@ import { LoginPageView } from './views/login.js';
 import { logout } from './views/logout.js';
 import { initNav } from './views/navigation.js';
 import { registerPageView } from './views/register.js';
+import { searchView } from './views/search.js';
 
 page(initNav)
 page('/',homePageView);
@@ -20,5 +21,6 @@ page('/details/:id',detailsPageView)
 page('/edit',editPageView);
 page('/create',createPageView)
 page('/delete',deleteCar)
+page('/search',searchView)
 
 page.start();
