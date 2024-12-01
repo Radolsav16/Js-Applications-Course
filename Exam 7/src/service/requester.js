@@ -1,13 +1,13 @@
-import { getAccessToken } from "./userService.js";
+import { getAccessToken } from "./userService";
 
-async function requester(method,url,data){
+async function requester(method,url,data) {
     const options = {
         method,
         headers:{}
     }
 
     options.headers['Content-Type'] = 'application/json';
-    
+
     const accessToken = getAccessToken();
 
     if(accessToken){
@@ -20,38 +20,36 @@ async function requester(method,url,data){
 
     const res = await fetch(url,options);
 
+    if(!res.ok){
+        throw Error('Error in request!');
+    }
+
     if(res.status === 204){
         return;
     }
 
-    if(!res.ok){
-        throw Error('Incorrect request!!');
-
-    }
-
-    return await res.json();
-
-    
+    return res.json();
 }
 
 
 
 async function get(url) {
-    return await requester('GET',url);   
+    return await requester('GET',url);
 }
 
 
 async function post(url,data) {
-    return await requester('POST',url,data);   
+    return await requester('POST',url,data);
 }
 
 
 async function put(url,data) {
-    return await requester('PUT',url,data);   
+    return await requester('PUT',url,data);
 }
 
+
 async function del(url) {
-    return await requester('DELETE',url);   
+    return await requester('DELETE',url);
 }
 
 
@@ -61,4 +59,3 @@ export const api = {
     put,
     del
 }
-

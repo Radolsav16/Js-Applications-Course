@@ -4,21 +4,21 @@ export function setUserData(id,accessToken){
 }
 
 
+export function clearUserData(){
+    localStorage.clear();
+}
+
+
 export function getAccessToken(){
     return localStorage.getItem('accessToken');
 }
+
 
 export function getUserId(){
     return localStorage.getItem('userId');
 }
 
 
-export function clearUserData(){
-    localStorage.clear();
+export function isOwner(userId,ownerId){
+    return userId === ownerId;
 }
-
-
-export function isOwner(userId,ownerID){
-    return userId === ownerID;
-}
-

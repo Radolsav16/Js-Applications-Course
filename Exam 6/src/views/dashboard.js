@@ -29,6 +29,5 @@ const dashboardTemplate = (data) => html `
 
 export async function dashboardPageView(){
     const data = await api.get(itemEndpoins.getAll)
-    console.log(data);
     render(dashboardTemplate(data),main)
 }
