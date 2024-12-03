@@ -187,9 +187,10 @@ describe('E2E tests', function () {
     it('logged user should see correct navigation', async () => {
       // Login user
       const data = mockData.users[0];
-      await page.goto(host);
-      await page.waitForSelector('#login');
-
+      const { post } = await handle(endpoints.login);
+      const { onResponse } = post(data);
+       // Login user
+       await page.goto(host);
       await page.click('nav >> text=Login');
       await page.waitForSelector('#login-view');
 
@@ -197,7 +198,12 @@ describe('E2E tests', function () {
       await page.fill('[name="email"]', data.email);
       await page.fill('[name="password"]', data.password);
 
-      page.click('form >> text=Login'), await page.waitForSelector('#user');
+      const[loginResponse] = await Promise.all([
+        onResponse(),
+        page.click('form >> text=Login')
+      ])
+
+      await page.waitForSelector('#user');
 
       //Test for navigation
       expect(await page.isVisible('#guest')).to.be.false;
@@ -297,7 +303,7 @@ describe('E2E tests', function () {
 
     it("non-author can't click on other post", async () => {
       await loginUser();
-      const data = mockData.catalog[1];
+      const data = mockData.catalog;
       const { get } = await handle(endpoints.catalog);
       get(data);
 
@@ -316,7 +322,7 @@ describe('E2E tests', function () {
 
     it('author can click on other post', async () => {
       await loginUser();
-      const data = mockData.catalog[0];
+      const data = mockData.catalog;
       const { get } = await handle(endpoints.catalog);
       get(data);
 
