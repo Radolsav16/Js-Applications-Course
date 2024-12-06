@@ -1,4 +1,4 @@
-const baseUrl = 'http://localhost:3030/data/albums'
+const baseUrl = 'http://localhost:3030/data/shoes'
 
 
 export const itemEndpoins = {
